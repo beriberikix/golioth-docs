@@ -204,6 +204,10 @@
                     "releaseId": {
                       "type": "string",
                       "id": 1
+                    },
+                    "projectId": {
+                      "type": "string",
+                      "id": 2
                     }
                   }
                 },
