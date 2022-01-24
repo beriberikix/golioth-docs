@@ -15,13 +15,16 @@ export const MessageFields = ({ fields, enums }) => {
     "google.protobuf.Value": "JSON Value",
   };
   const enumsMap = enums.reduce((acc, e) => {
-    acc[e.name] = Object.keys(e.values).map((k) => `${k}:${e.values[k]}`);
+    acc[e.name] = Object.keys(e.values).map((k) => `${k} (${e.values[k]})`);
     return acc;
   }, {});
-  const getTypeName = (name) => {
+  const getDetails = (name) => {
     if (enumsMap[name]) {
-      return `${name} (${enumsMap[name].join(", ")})`;
+      return enumsMap[name].join(", ");
     }
+    return "";
+  };
+  const getTypeName = (name) => {
     return typeNames[name] || name;
   };
   return (
@@ -30,6 +33,7 @@ export const MessageFields = ({ fields, enums }) => {
         <tr>
           <th>Field</th>
           <th>Type</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>
@@ -38,6 +42,7 @@ export const MessageFields = ({ fields, enums }) => {
             <tr key={f.name}>
               <td>{f.name}</td>
               <td>{getTypeName(f.type)}</td>
+              <td>{getDetails(f.type)}</td>
             </tr>
           );
         })}
@@ -101,8 +106,14 @@ export const MessageTypes = () => {
   return (
     <>
       {types.map((t) => {
+        let payload = (t.openapi.example || "").replaceAll("'", '"');
+        try {
+          payload = JSON.stringify(JSON.parse(payload), null, 2);
+        } catch (err) {
+          console.log("failed to parse event payload example");
+        }
         return (
-          <p key={t.cloudEvent.message_type}>
+          <div key={t.cloudEvent.message_type}>
             <h2>
               {t.name} <sup>{getSubName(t.cloudEvent.subject)}</sup>
             </h2>
@@ -110,8 +121,8 @@ export const MessageTypes = () => {
             <h4>Event Type: {t.cloudEvent.message_type}</h4>
             <MessageFields fields={t.fields} enums={enums} />
             <h4>Payload</h4>
-            <CodeBlock>{t.openapi.example || ""}</CodeBlock>
-          </p>
+            <CodeBlock>{payload}</CodeBlock>
+          </div>
         );
       })}
     </>
