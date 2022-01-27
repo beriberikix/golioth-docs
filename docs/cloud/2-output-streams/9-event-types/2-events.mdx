@@ -121,7 +121,7 @@ export const MessageTypes = () => {
             <h4>Event Type: {t.cloudEvent.message_type}</h4>
             <MessageFields fields={t.fields} enums={enums} />
             <h4>Payload</h4>
-            <CodeBlock>{payload}</CodeBlock>
+            <CodeBlock className="language-json">{payload}</CodeBlock>
           </div>
         );
       })}
