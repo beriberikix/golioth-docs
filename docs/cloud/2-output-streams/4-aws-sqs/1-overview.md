@@ -7,7 +7,7 @@ hide_title: true
 
 ## AWS SQS Overview
 
-Amazon Simple Queue Service (SQS) is a fully managed message queuing service that enables you receive events generated on Golioth platform in a way that can be processed in a decoupled and scalable way. SQS eliminates the complexity and overhead associated with managing and operating message-oriented middleware systems. Data can be ingested using multiple solution inside AWS, including Serverless offering like AWS Lambda.
+Amazon Simple Queue Service (SQS) is a fully managed message queuing service that enables you receive events generated on the Golioth platform that can be processed in a decoupled and scalable way. SQS eliminates the complexity and overhead associated with managing and operating message-oriented middleware systems. Data can be ingested using multiple solutions inside of AWS, including Serverless offerings like AWS Lambda.
 
 ### AWS SQS Specific Attributes
 
@@ -22,45 +22,45 @@ For each Output Stream type, there is a set of specify attributes. Here are the 
 
 ### Setup
 
-To use this integration, you need to create a SQS Queue and an user with permissions to write to that Queue.
+To use this integration, you need to create an SQS Queue and and a user with permissions to write to that Queue.
 
 1. Create User and Policy
 
 - Open the IAM console at https://console.aws.amazon.com/iam/
-- On the navigation menu, choose Policies.
-- Click on the "Create Policy".
+- On the navigation menu, choose Policies
+- Click on "Create Policy"
 - Create a policy with access for SQS and the following actions:
   - sqs:Write:SendMessage
 - Restrict the policy to the following resources:
   - arn:aws:sqs:{your-region}:{your-account-id}:{your-queue-name}
-- Go back to the IAM console home.
-- On the navigation menu, choose Users.
+- Go back to the IAM console home
+- On the navigation menu, choose Users
 - Click on "Add users"
 - Give it a name and on the AWS Access Type section, select "Access key - Programmatic access"
-- After creating the user, choose your user name and save the User ARN to be used on a later step.
+- After creating the user, choose your user name and save the User ARN to be used on a later step
 
-2. Create a SQS Queue
+2. Create an SQS Queue
 
 - Open the SQS console at https://console.aws.amazon.com/sqs
-- Click on the "Create Queue"
+- Click on "Create Queue"
 - Give the queue a name
-- On the Access policy section, add your user ARN to allow it to send messages to the queue.
+- On the Access policy section, add your user ARN to allow it to send messages to the queue
 
 3. Get your access key ID and secret access key
 
-- Open the IAM console at https://console.aws.amazon.com/iam/.
-- On the navigation menu, choose Users.
-- Choose your IAM user name (not the check box).
-- Open the Security credentials tab, and then choose Create access key.
+- Open the IAM console at https://console.aws.amazon.com/iam/
+- On the navigation menu, choose Users
+- Choose your IAM user name (not the check box)
+- Open the Security credentials tab, and then choose Create access key
 - To see the new access key, choose Show. Your credentials resemble the following:
-  - Access Key ID: AKIAIOSFODNN7EXAMPLE
-  - Secret Access Key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+  - Access Key ID: `AKIAIOSFODNN7EXAMPLE`
+  - Secret Access Key: `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`
 
 ### Example
 
-As mentioned on [Output Streams Overview](/cloud/output-streams), events are send using [Cloud Events](https://cloudevents.io) format. For AWS SQS, some metadata of the event are sent together with the message body.
+As mentioned on the [Output Streams Overview](/cloud/output-streams), events are sent using the [Cloud Events](https://cloudevents.io) format. For AWS SQS, some metadata of the event are sent together with the message body.
 
-Here is an example of a event arriving on SQS. Payload is going to be inside a `data` attribute ( see event payloads on [Output Streams Event Types](/cloud/output-streams/event-types/events) ). And the other attributes are metadata related to Cloud Events.
+Here is an example of an event arriving on SQS. The payload is going to be inside of a `data` attribute (see event payloads on [Output Streams Event Types](/cloud/output-streams/event-types/events)). The other attributes are metadata related to Cloud Events.
 
 ```json
 {

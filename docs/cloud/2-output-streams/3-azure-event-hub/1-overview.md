@@ -35,7 +35,7 @@ To use this integration, you need to create an Event Hub on Azure and get the co
 
 ### Example
 
-As mentioned on [Output Streams Overview](/cloud/output-streams), events are sent using [Cloud Events](https://cloudevents.io) format. For Azure Event Hub, some metadata of the event is sent together with the message body.
+As mentioned on [Output Streams Overview](/cloud/output-streams), events are sent using [Cloud Events](https://cloudevents.io) format. For Azure Event Hub, some metadata of the event are sent together with the message body.
 
 Here is an example of an event arriving on Event Hub. The payload will be inside a `data` attribute (see event payloads on [Output Streams Event Types](/cloud/output-streams/event-types/events)). The other attributes are metadata related to Cloud Events.
 
