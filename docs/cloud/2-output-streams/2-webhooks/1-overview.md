@@ -4,7 +4,7 @@ title: Overview
 slug: /cloud/output-streams/webhooks
 ---
 
-Webhook are a simple and flexible way to receive events from Golioth platform using HTTP. Is really easy to build a web server to receive those events and you can write you own logic to process them.
+Webhooks are a simple and flexible way to receive events from the Golioth platform using HTTP. It is really easy to build a web server to receive these events and you can write you own logic to process them.
 
 ### Webhook Specific Attributes
 
@@ -12,14 +12,14 @@ For each Output Stream type, there is a set of specify attributes. Here are the 
 
 | Attribute | Type   | Required | Description                                         |
 | --------- | ------ | -------- | --------------------------------------------------- |
-| uri       | string | ✅       | URI where events are gonna be send via POST request |
-| headers   | object |          | Extra HTTP headers to be send                       |
+| uri       | string | ✅       | URI where events are sent via POST request          |
+| headers   | object |          | Extra HTTP headers to send                          |
 
 ### Example
 
-As mentioned on [Output Streams Overview](/cloud/output-streams), events are send using [Cloud Events](https://cloudevents.io) format. For Webhook specifically, some metadata of the event are sent as HTTP headers.
+As mentioned on [Output Streams Overview](/cloud/output-streams), events are sent using the [Cloud Events](https://cloudevents.io) format. For Webhooks specifically, some metadata of the event are sent as HTTP headers.
 
-Here is an example of a event arriving on a webhook. Headers prefixed with `Ce-` are related to Cloud Events and the message body is the event payload ( see event payloads on [Output Streams Event Types](/cloud/output-streams/event-types/events) ).
+Here is an example of an event arriving on a webhook. Headers prefixed with `Ce-` are related to Cloud Events and the message body is the event payload (see event payloads on [Output Streams Event Types](/cloud/output-streams/event-types/events)).
 
 ```
 POST {your-uri-path} HTTP/1.1
